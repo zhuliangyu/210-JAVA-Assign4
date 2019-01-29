@@ -12,7 +12,7 @@ public abstract class Quiz {
     protected QuestionsList questions;
 
     // The index of the next question to show to the user.
-    private int nextQuestion;
+    public int nextQuestion;
 
     // Whether or not this quiz has started.
     private boolean quizStarted;
@@ -21,13 +21,13 @@ public abstract class Quiz {
     private boolean quizFinished;
 
     // Is user out of tries?
-    private boolean outOfTries;
+    public boolean outOfTries;
 
     // The user's mark so far.
     private int markSoFar;
 
     // The current question that is displayed to the user.
-    protected Question curQuestion;
+    public Question curQuestion;
 
     // REQUIRES: questions cannot be an empty list
     // EFFECTS: constructs quiz with given list of questions

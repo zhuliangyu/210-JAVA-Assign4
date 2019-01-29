@@ -1,9 +1,11 @@
 package ca.ubc.cpsc210.quizbuilder;
 
+import ca.ubc.cpsc210.quizbuilder.model.question.MultiplicationQuestion;
 import ca.ubc.cpsc210.quizbuilder.model.question.Question;
 import ca.ubc.cpsc210.quizbuilder.model.question.TrueFalseQuestion;
 import ca.ubc.cpsc210.quizbuilder.model.questionslist.QuestionsList;
 import ca.ubc.cpsc210.quizbuilder.model.questionslist.RandomizedQuestionsList;
+import ca.ubc.cpsc210.quizbuilder.model.quiz.DecrementMarksQuiz;
 import ca.ubc.cpsc210.quizbuilder.model.quiz.EachAnswerMustBeRightQuiz;
 import ca.ubc.cpsc210.quizbuilder.model.quiz.Quiz;
 import ca.ubc.cpsc210.quizbuilder.model.quiz.TimedQuiz;
@@ -26,16 +28,17 @@ public class QuizRunner {
         Question q2 = null;
         Question q3 = null;
 
+        //原来是8次的!!!!!!!!!!!!!!
         q1 = new TrueFalseQuestion(8, "You are awesome.", true);
         q2 = new TrueFalseQuestion(8, "Donuts are bad for you.", true);
         // Un-comment next line to test MultiplicationQuestion:
-        // q3 = new MultiplicationQuestion(8, 5, 2);
+        q3 = new MultiplicationQuestion(8, 5, 2);
 
         QuestionsList qnList = new RandomizedQuestionsList();
         qnList.addQuestion(q1);
         qnList.addQuestion(q2);
         // Un-comment next line to test MultiplicationQuestion:
-        // qnList.addQuestion(q3);
+        qnList.addQuestion(q3);
         return qnList;
     }
 
@@ -80,7 +83,7 @@ public class QuizRunner {
                 quiz = new EachAnswerMustBeRightQuiz(qnList);
             } else if (qnType.equals("2")) {
                 // Un-comment next line to interactively test DecrementMarksQuiz:
-                // quiz = new DecrementMarksQuiz(qnList);
+                quiz = new DecrementMarksQuiz(qnList);
             } else if (qnType.equals("3")) {
                 int numSeconds = getTimeLimitForQuiz(quizRunner);
                 quiz = new TimedQuiz(qnList, numSeconds);
@@ -106,7 +109,7 @@ public class QuizRunner {
         quizRunner.print("Enter a number for the type of quiz:");
         quizRunner.print("1 : Each answer must be right quiz.");
         // Un-comment the next line to interactively test DecrementMarksQuiz:
-        // quizRunner.print("2 : Decrement marks quiz.");
+        quizRunner.print("2 : Decrement marks quiz.");
         quizRunner.print("3 : A quiz with a timer.");
         quizRunner.print("Your response: ");
     }
