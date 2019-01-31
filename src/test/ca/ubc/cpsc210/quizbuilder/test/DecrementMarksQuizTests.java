@@ -39,7 +39,10 @@ public class DecrementMarksQuizTests {
     public void testSubmitAnswerCorrect() {
 //        decrementMarksQuiz.curQuestion();
 
-        testQuiz.curQuestion = q1;
+//        testQuiz.curQuestion = q1;
+        testQuiz.startQuiz();
+        testQuiz.getNextQuestion();
+
         String ans = testQuiz.submitAnswer("true");
         assertEquals(24, testQuiz.getMaxMark());
         assertEquals("Your answer is correct. You earned 8 points!", ans);
@@ -49,7 +52,9 @@ public class DecrementMarksQuizTests {
     @Test
     public void testSubmitAnswerWrong() {
 
-        testQuiz.curQuestion = q1;
+//        testQuiz.curQuestion = q1;
+        testQuiz.startQuiz();
+        testQuiz.getNextQuestion();
         String ans = testQuiz.submitAnswer("false");
         assertEquals(23, testQuiz.getMaxMark());
         assertEquals("Your answer is not correct. Max marks remaining for question: 7", ans);
@@ -58,11 +63,45 @@ public class DecrementMarksQuizTests {
     @Test
     public void testSubmitAnswerOutOfTries() {
 
-        testQuiz.curQuestion = q1;
-        testQuiz.nextQuestion = 1;
-        testQuiz.curQuestion.setMaxMark(1);
-        String ans = testQuiz.submitAnswer("false");
-        assertEquals(q2, testQuiz.getNextQuestion());
+//        testQuiz.curQuestion = q1;
+//        testQuiz.nextQuestion = 1;
+//        testQuiz.curQuestion.setMaxMark(1);
+//        String ans = testQuiz.submitAnswer("false");
+//        assertEquals(q2, testQuiz.getNextQuestion());
+
+        testQuiz.startQuiz();
+        testQuiz.getNextQuestion();
+        while (testQuiz.curQuestion.getMaxMark()>0){
+            testQuiz.submitAnswer("false");
+        }
+
+        testQuiz.curQuestion = q2;
+
+
+
+
+    }
+
+    @Test
+    public void testSubmitAnswerOutOfTriesWithCorrectAns() {
+
+//        testQuiz.curQuestion = q1;
+//        testQuiz.nextQuestion = 1;
+//        testQuiz.curQuestion.setMaxMark(1);
+//        String ans = testQuiz.submitAnswer("false");
+//        assertEquals(q2, testQuiz.getNextQuestion());
+
+        testQuiz.startQuiz();
+        testQuiz.getNextQuestion();
+        while (testQuiz.curQuestion.getMaxMark()>1){
+            testQuiz.submitAnswer("false");
+        }
+        testQuiz.submitAnswer("true");
+
+        testQuiz.curQuestion = q2;
+
+
+
 
     }
 
