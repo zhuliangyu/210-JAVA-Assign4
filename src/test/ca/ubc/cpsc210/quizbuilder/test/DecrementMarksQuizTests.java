@@ -36,32 +36,36 @@ public class DecrementMarksQuizTests {
     }
 
     @Test
-    public void testSubmitAnswerCorrect() {
+    public void testSubmitAnswerCorrectWithEnoughTries() {
 //        decrementMarksQuiz.curQuestion();
-
 //        testQuiz.curQuestion = q1;
+
         testQuiz.startQuiz();
         testQuiz.getNextQuestion();
 
         String ans = testQuiz.submitAnswer("true");
+
+        assertEquals(q2, testQuiz.getNextQuestion());
         assertEquals(24, testQuiz.getMaxMark());
         assertEquals("Your answer is correct. You earned 8 points!", ans);
 
     }
 
     @Test
-    public void testSubmitAnswerWrong() {
+    public void testSubmitAnswerWrongWithEnoughTrials() {
 
 //        testQuiz.curQuestion = q1;
         testQuiz.startQuiz();
         testQuiz.getNextQuestion();
         String ans = testQuiz.submitAnswer("false");
         assertEquals(23, testQuiz.getMaxMark());
+        assertEquals(q1, testQuiz.curQuestion);
+
         assertEquals("Your answer is not correct. Max marks remaining for question: 7", ans);
 
     }
     @Test
-    public void testSubmitAnswerOutOfTries() {
+    public void testSubmitAnswerOutOfTriesWithWrongAns() {
 
 //        testQuiz.curQuestion = q1;
 //        testQuiz.nextQuestion = 1;
@@ -71,13 +75,13 @@ public class DecrementMarksQuizTests {
 
         testQuiz.startQuiz();
         testQuiz.getNextQuestion();
+        String ans="";
         while (testQuiz.curQuestion.getMaxMark()>0){
-            testQuiz.submitAnswer("false");
+           ans =  testQuiz.submitAnswer("false");
         }
 
         testQuiz.curQuestion = q2;
-
-
+        assertEquals("Your answer is not correct. Max marks remaining for question: 0", ans);
 
 
     }
@@ -93,15 +97,15 @@ public class DecrementMarksQuizTests {
 
         testQuiz.startQuiz();
         testQuiz.getNextQuestion();
+        String ans = "";
         while (testQuiz.curQuestion.getMaxMark()>1){
-            testQuiz.submitAnswer("false");
+             testQuiz.submitAnswer("false");
         }
-        testQuiz.submitAnswer("true");
+        ans = testQuiz.submitAnswer("true");
+
+        assertEquals("Your answer is correct. You earned 1 points!", ans);
 
         testQuiz.curQuestion = q2;
-
-
-
 
     }
 
